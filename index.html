@@ -684,8 +684,9 @@
     fontsReady.then(function(){
       return html2canvas(card, {
         backgroundColor: null,
-        scale: 3,
+        scale: 2,
         useCORS: true,
+        logging: false,
         onclone: function(clonedDoc){
           const inner = clonedDoc.getElementById('cardInner');
           if(inner){
@@ -712,15 +713,34 @@
         }
       });
     }).then(function(canvas){
-      tab.classList.remove('exporting');
-      const link = document.createElement('a');
-      const downloadName = currentLang === 'ar'
-        ? 'دعوة-فريد-سارة.png'
-        : 'Invitation-Ferid-Sara.png';
-      link.download = downloadName;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-    }).catch(function(){
+      return new Promise(function(resolve, reject){
+        canvas.toBlob(function(blob){
+          if(!blob){
+            reject(new Error('Export canvas failed'));
+            return;
+          }
+
+          const objectUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          const downloadName = currentLang === 'ar'
+            ? 'دعوة-فريد-سارة.png'
+            : 'Invitation-Ferid-Sara.png';
+          link.href = objectUrl;
+          link.download = downloadName;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+
+          setTimeout(function(){
+            document.body.removeChild(link);
+            URL.revokeObjectURL(objectUrl);
+            resolve();
+          }, 200);
+        }, 'image/png');
+      });
+    }).catch(function(err){
+      console.error('Export failed', err);
+    }).finally(function(){
       tab.classList.remove('exporting');
     });
   }
