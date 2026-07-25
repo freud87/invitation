@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferid &amp; Sara — Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Tajawal remplacé par Cairo -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Cairo:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
@@ -120,7 +121,7 @@
     font-size:20px;
   }
   .lang-btn[data-lang="ar"] .sub{
-    font-family:'Tajawal', sans-serif;
+    font-family:'Cairo', sans-serif;
   }
 
   /* ---------- NAME STAGE ---------- */
@@ -139,7 +140,7 @@
     color:var(--ink-soft);
     margin-bottom:30px;
   }
-  [dir="rtl"] .hint{ font-family:'Tajawal', sans-serif; }
+  [dir="rtl"] .hint{ font-family:'Cairo', sans-serif; }
 
   .name-field{
     width:100%;
@@ -174,7 +175,7 @@
     letter-spacing:.02em;
   }
   .lang-warning.show{opacity:1; transform:translateY(0);}
-  [dir="rtl"] .lang-warning{ font-family:'Tajawal', sans-serif; }
+  [dir="rtl"] .lang-warning{ font-family:'Cairo', sans-serif; }
 
   .validate-row{
     display:flex;
@@ -197,7 +198,7 @@
     transition: background .3s ease, color .3s ease, transform .2s ease;
   }
   [dir="rtl"] .validate-btn{
-    font-family:'Tajawal', sans-serif;
+    font-family:'Cairo', sans-serif;
     letter-spacing:.02em;
   }
   .validate-btn:hover:not(:disabled){background:var(--gold-deep); color:var(--ivory); transform:translateY(-1px);}
@@ -272,7 +273,7 @@
     text-transform:uppercase;
   }
   [dir="rtl"] .eyebrow{
-    font-family:'Tajawal', sans-serif;
+    font-family:'Cairo', sans-serif;
     letter-spacing:.08em;
   }
   .guest-line{
@@ -316,7 +317,7 @@
     max-width:340px;
     margin:0 auto;
   }
-  [dir="rtl"] .invite-blurb{ font-family:'Tajawal', sans-serif; font-weight:300; }
+  [dir="rtl"] .invite-blurb{ font-family:'Cairo', sans-serif; font-weight:300; }
 
   .detail-block{
     margin-top:30px;
@@ -336,7 +337,7 @@
     margin-top:6px;
     letter-spacing:.02em;
   }
-  [dir="rtl"] .detail-venue{ font-family:'Tajawal', sans-serif; }
+  [dir="rtl"] .detail-venue{ font-family:'Cairo', sans-serif; }
 
   .spark{
     position:fixed;
@@ -362,7 +363,7 @@
     .card{padding:44px 22px 34px;}
   }
 
-  /* ---------- EXPORT PNG + LANGUE (demi-cercles sur le bord vertical) ---------- */
+  /* ---------- EXPORT PNG + LANGUE ---------- */
   .export-tab, .lang-tab{
     position:absolute;
     width:34px;
@@ -374,7 +375,7 @@
     justify-content:center;
     cursor:pointer;
     opacity:.85;
-    z-index:-10;
+    z-index:10;
     font-size:13px;
     line-height:1;
     color:var(--gold-deep);
@@ -598,9 +599,6 @@
     renderInvite(currentLang, name, gender);
   }
 
-  /* Fait glisser les deux bouts (export + langue) hors d'un côté
-     puis les fait réapparaître de l'autre côté. Ne joue rien si le
-     côté ne change pas. */
   function switchTabsSide(newSide){
     const tabs = [document.getElementById('exportTab'), document.getElementById('langTab')];
     const oldSide = tabs[0].getAttribute('data-side');
@@ -620,7 +618,7 @@
         t.style.transition = 'none';
         t.style.transform = 'translateX(' + inX + ')';
       });
-      void tabs[0].offsetWidth; // force reflow avant de réactiver la transition
+      void tabs[0].offsetWidth;
       tabs.forEach(function(t){
         t.style.transition = '';
         t.style.transform = 'translateX(0)';
@@ -674,6 +672,7 @@
     }
   }
 
+  /* TELECHARGEMENT COMPATIBLE PC ET MOBILE */
   function downloadPNG(){
     const tab = document.getElementById('exportTab');
     const card = document.querySelector('#stage-invite .card');
@@ -713,31 +712,15 @@
         }
       });
     }).then(function(canvas){
-      return new Promise(function(resolve, reject){
-        canvas.toBlob(function(blob){
-          if(!blob){
-            reject(new Error('Export canvas failed'));
-            return;
-          }
+      const dataUrl = canvas.toDataURL('image/png');
+      const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
 
-          const objectUrl = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          const downloadName = currentLang === 'ar'
-            ? 'دعوة-فريد-سارة.png'
-            : 'Invitation-Ferid-Sara.png';
-          link.href = objectUrl;
-          link.download = downloadName;
-          link.style.display = 'none';
-          document.body.appendChild(link);
-          link.click();
-
-          setTimeout(function(){
-            document.body.removeChild(link);
-            URL.revokeObjectURL(objectUrl);
-            resolve();
-          }, 200);
-        }, 'image/png');
-      });
+      const a = document.createElement('a');
+      a.href = dataUrl;
+      a.download = downloadName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }).catch(function(err){
       console.error('Export failed', err);
     }).finally(function(){
@@ -762,8 +745,6 @@
     }
   }
 
-  /* Au chargement : si une invitation est déjà sauvegardée pour une
-     langue, on l'affiche directement sans repasser par le choix de langue. */
   (function initFromStorage(){
     const data = loadGuestData();
     let lang = null;
