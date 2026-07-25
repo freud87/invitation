@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ferid &amp; Sara — Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Cairo:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Remplacement de html2canvas par html-to-image (rendu parfait de l'arabe) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+<!-- Remplacement de html2canvas par dom-to-image-more pour un rendu arabe parfait sur SVG natif -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.3.1/dom-to-image-more.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 <style>
   :root{
     --ivory:#FAF6ED;
@@ -674,58 +674,50 @@
     }
   }
 
-  /* SOLUTION DÉFINITIVE : TÉLÉCHARGEMENT COMPATIBLE PC/MOBILE + RENDU RENDU PARFAIT ARABE ET POLICES */
-  async function downloadPNG(){
+  /* TELECHARGEMENT OPTIMISE POUR PC ET MOBILE (dom-to-image-more) */
+  function downloadPNG(){
     const tab = document.getElementById('exportTab');
     const langTab = document.getElementById('langTab');
     const card = document.querySelector('#stage-invite .card');
     
     tab.classList.add('exporting');
-
-    // Masquer temporairement les boutons d'export pendant la capture
+    
+    // Masquer les boutons d'onglets pour le rendu PNG
     tab.style.display = 'none';
     langTab.style.display = 'none';
 
-    try {
-      // Attendre la stabilisation du chargement des polices Google Fonts
-      if (document.fonts && document.fonts.ready) {
-        await document.fonts.ready;
-      }
+    // Assure la préparation des polices
+    const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
 
-      // Génération du Blob PNG haute définition via SVG natif (htmlToImage)
-      const blob = await htmlToImage.toBlob(card, {
-        pixelRatio: 2,
-        cacheBust: true,
-        filter: (node) => {
-          return node.id !== 'exportTab' && node.id !== 'langTab';
+    fontsReady.then(function(){
+      return domtoimage.toPng(card, {
+        scale: 2,
+        quality: 0.95,
+        filter: function(node){
+          // Exclure les onglets si trouvés dans le DOM
+          return !(node.id === 'exportTab' || node.id === 'langTab');
         }
       });
-
-      if (!blob) throw new Error("Génération de l'image échouée.");
-
-      // Téléchargement sécurisé universel PC & Mobile
+    }).then(function(dataUrl){
       const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = objectUrl;
-      link.download = downloadName;
       
+      const link = document.createElement('a');
+      link.download = downloadName;
+      link.href = dataUrl;
       document.body.appendChild(link);
       link.click();
       
-      setTimeout(() => {
+      setTimeout(function(){
         document.body.removeChild(link);
-        URL.revokeObjectURL(objectUrl);
-      }, 300);
-
-    } catch (err) {
-      console.error('Erreur exportation PNG:', err);
-    } finally {
+      }, 100);
+    }).catch(function(err){
+      console.error('Export failed', err);
+    }).finally(function(){
       // Réafficher les onglets
       tab.style.display = '';
       langTab.style.display = '';
       tab.classList.remove('exporting');
-    }
+    });
   }
 
   function launchSparks(){
