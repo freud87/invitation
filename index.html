@@ -6,11 +6,11 @@
 <title>Ferid &amp; Sara — Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet" crossorigin="anonymous">
 
 <!-- Capture SVG/PNG haute fidélité -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.3.1/dom-to-image-more.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous">
 
 <style>
   :root {
@@ -88,9 +88,11 @@
   }
 
   .couple-names .amp {
+    font-family: 'Pinyon Script', cursive;
     color: var(--gold);
     font-style: normal;
-    font-size: .5em;
+    font-size: .85em;
+    font-weight: 400;
     padding: 0 14px;
     vertical-align: middle;
     display: inline-block;
@@ -137,7 +139,7 @@
   }
 
   .lang-btn[data-lang="ar"] .sub {
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Tajawal', sans-serif;
   }
 
   /* ---------- STAGE 2 : NOM ---------- */
@@ -149,7 +151,8 @@
   }
 
   [dir="rtl"] .stage-label {
-    font-family: 'Amiri', serif !important;
+    font-family: 'Aref Ruqaa', serif !important;
+    font-weight: 700;
     font-style: normal;
   }
 
@@ -159,7 +162,7 @@
     margin-bottom: 30px;
   }
 
-  [dir="rtl"] .hint { font-family: 'Cairo', sans-serif !important; }
+  [dir="rtl"] .hint { font-family: 'Tajawal', sans-serif !important; }
 
   .name-field {
     width: 100%;
@@ -196,7 +199,7 @@
   }
 
   .lang-warning.show { opacity: 1; transform: translateY(0); }
-  [dir="rtl"] .lang-warning { font-family: 'Cairo', sans-serif !important; }
+  [dir="rtl"] .lang-warning { font-family: 'Tajawal', sans-serif !important; }
 
   .validate-row {
     display: flex;
@@ -221,7 +224,7 @@
   }
 
   [dir="rtl"] .validate-btn {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     letter-spacing: .02em;
   }
 
@@ -314,6 +317,7 @@
     font-size: 19px;
     color: var(--ink-soft);
     margin-top: 18px;
+    margin-bottom: 20px;
   }
 
   .guest-name { color: var(--ink); font-weight: 600; }
@@ -326,9 +330,11 @@
   }
 
   .invite-names .amp {
+    font-family: 'Pinyon Script', cursive;
     color: var(--gold);
     font-style: normal;
-    font-size: .45em;
+    font-size: .7em;
+    font-weight: 400;
     padding: 0 16px;
     vertical-align: middle;
     display: inline-block;
@@ -359,7 +365,7 @@
 
   /* REGLES STRICTES D'APPLICATION DE LA TYPOGRAPHIE ARABE (RTL) */
   [dir="rtl"] .eyebrow {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     letter-spacing: .06em;
     font-weight: 600;
   }
@@ -371,28 +377,28 @@
   }
 
   [dir="rtl"] .invite-names {
-    font-family: 'Amiri', serif !important;
+    font-family: 'Aref Ruqaa', serif !important;
     font-weight: 700;
     font-style: normal;
     font-size: 48px;
   }
 
   [dir="rtl"] .invite-blurb {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.9;
   }
 
   [dir="rtl"] .detail-date {
-    font-family: 'Amiri', serif !important;
+    font-family: 'Aref Ruqaa', serif !important;
     font-style: normal;
     font-size: 24px;
     font-weight: 700;
   }
 
   [dir="rtl"] .detail-venue {
-    font-family: 'Cairo', sans-serif !important;
+    font-family: 'Tajawal', sans-serif !important;
     font-size: 13px;
     font-weight: 500;
   }
@@ -409,7 +415,7 @@
     justify-content: center;
     cursor: pointer;
     opacity: .85;
-    z-index: 10;
+    z-index: -10;
     font-size: 13px;
     color: var(--gold-deep);
     user-select: none;
@@ -513,8 +519,9 @@
         <span class="icon"><i class="fa-solid fa-globe"></i></span>
       </div>
       <div class="card-inner" id="cardInner">
-        <div class="eyebrow" id="inv-eyebrow">Avec la bénédiction de nos familles</div>
         <div class="guest-line" id="inv-guest">Cher(e) <span class="guest-name" id="guestNameOut"></span>,</div>
+        <div class="eyebrow" id="inv-eyebrow">Avec la bénédiction de nos familles</div>
+        
         <div class="invite-names" id="inv-names">Ferid<span class="amp">✦</span>Sara</div>
         <div class="invite-blurb" id="inv-blurb">Nous avons l'honneur de vous convier à la célébration de notre union et serions comblés de partager ce moment avec vous.</div>
         <div class="divider"></div>
@@ -532,51 +539,50 @@
   let currentLang = 'fr';
   const STORAGE_KEY = 'feridSaraInvite';
 
-  const content = {
-    fr: {
-      dir: 'ltr',
-      nameLabel: 'Votre nom',
-      nameHint: 'Afin de personnaliser votre invitation',
-      placeholder: 'Écrivez votre nom ici',
-      validateM: 'Valider avec M.',
-      validateF: 'Valider avec Mme',
-      back: '← changer de langue',
-      eyebrow: 'Avec la bénédiction des familles MELLITI et KHARROUBI',
-      guestPrefixM: 'Cher ',
-      guestPrefixF: 'Chère ',
-      guestSuffix: ',',
-      nameA: 'Ferid',
-      nameB: 'Sara',
-      amp: '✦',
-      blurb: "Nous avons l'honneur de vous convier à la célébration de notre union et serions comblés de partager ce moment avec vous.",
-      date: 'Samedi 29 Mai 2027',
-      venue: 'Salle des Fêtes Hannibal — Siliana',
-      side: 'right',
-      wrongLangMsg: "Merci d'écrire votre nom en français"
-    },
-    ar: {
-      dir: 'rtl',
-      nameLabel: 'اسمكم الكريم',
-      nameHint: 'لتخصيص دعوتكم',
-      placeholder: 'اكتب اسمك هنا',
-      validateM: 'تأكيد (السيد)',
-      validateF: 'تأكيد (السيدة)',
-      back: '→ تغيير اللغة',
-      eyebrow: 'بمباركة من عائلتي المليتي و الخروبي',
-      guestPrefixM: 'عزيزي ',
-      guestPrefixF: 'عزيزتي ',
-      guestSuffix: '،',
-      nameA: 'فريد',
-      nameB: 'سارة',
-      amp: '✦',
-      blurb: 'يشرّفنا دعوتكم للاحتفال بزفافنا، ويسعدنا كثيرًا مشاركتكم لهذه اللحظة الغالية علينا.',
-      date: 'السبت 29 ماي 2027',
-      venue: 'قاعة حنبعل للأفراح — سليانة',
-      side: 'left',
-      wrongLangMsg: 'الرجاء كتابة اسمك بالعربية فقط'
-    }
-  };
-
+const content = {
+  ar: {
+    dir: 'rtl',
+    nameLabel: 'اسمكم الكريم',
+    nameHint: 'لتخصيص دعوة الحضور الخاصة بكم',
+    placeholder: 'اكتب اسمك الكريم هنا',
+    validateM: 'تأكيد الحضور (السيد)',
+    validateF: 'تأكيد الحضور (السيدة)',
+    back: '→ تغيير اللغة',
+    eyebrow: 'يسرُّ عائلتا المليتي والخروبي بدعوتكم لمشاركتهما فرحة زفاف إبنيهما',
+    guestPrefixM: 'السيد ',
+    guestPrefixF: 'السيدة ',
+    guestSuffix: '،',
+    nameA: 'فريد',
+    nameB: 'سارة',
+    amp: '✦',
+    blurb: 'وحضوركم يسعدنا ويطرز ليلتنا بأجمل ألوان الفرح والسرور. نتشرف بشدة بوجودكم معنا في هذه اللحظة العاطرة.',
+    date: 'السبت 29 ماي 2027',
+    venue: 'قاعة حنبعل للأفراح — سليانة',
+    side: 'left',
+    wrongLangMsg: 'الرجاء كتابة اسمك بالأحرف العربية'
+  },
+  fr: {
+    dir: 'ltr',
+    nameLabel: 'Votre nom complet',
+    nameHint: 'Afin de personnaliser votre invitation',
+    placeholder: 'Écrivez votre nom ici',
+    validateM: 'Confirmer (M.)',
+    validateF: 'Confirmer (Mme)',
+    back: '← Changer de langue',
+    eyebrow: 'Les familles Melliti et Kharroubi ont le plaisir de vous convier à la célébration du mariage de leurs fils et fille',
+    guestPrefixM: 'Cher M. ',
+    guestPrefixF: 'Chère Mme ',
+    guestSuffix: ',',
+    nameA: 'Ferid',
+    nameB: 'Sara',
+    amp: '✦',
+    blurb: 'Votre présence à nos côtés sera le plus beau des cadeaux pour illuminer ce moment inoubliable.',
+    date: 'Samedi 29 Mai 2027',
+    venue: 'Salle des Fêtes Hannibal — Siliana',
+    side: 'right',
+    wrongLangMsg: "Merci d'écrire votre nom en français"
+  }
+};
   function loadGuestData(){
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
     catch(e){ return {}; }
@@ -740,13 +746,16 @@
     langTab.style.display = 'none';
 
     try {
-      // 1. Charger explicitement les typographies arabes en mémoire système avant la capture
+      // 1. Charger explicitement les typographies en mémoire système avant la capture
       if (document.fonts) {
         await Promise.all([
           document.fonts.load('400 16px "Amiri"'),
           document.fonts.load('700 16px "Amiri"'),
-          document.fonts.load('400 16px "Cairo"'),
-          document.fonts.load('600 16px "Cairo"'),
+          document.fonts.load('400 16px "Aref Ruqaa"'),
+          document.fonts.load('700 16px "Aref Ruqaa"'),
+          document.fonts.load('400 16px "Tajawal"'),
+          document.fonts.load('600 16px "Tajawal"'),
+          document.fonts.load('400 16px "Pinyon Script"'),
           document.fonts.ready
         ]);
       }
