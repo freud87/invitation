@@ -674,51 +674,49 @@
     }
   }
 
-  /* TELECHARGEMENT OPTIMISE POUR PC ET MOBILE (dom-to-image-more) */
-  function downloadPNG(){
-    const tab = document.getElementById('exportTab');
-    const langTab = document.getElementById('langTab');
-    const card = document.querySelector('#stage-invite .card');
-    
-    tab.classList.add('exporting');
-    
-    // Masquer les boutons d'onglets pour le rendu PNG
-    tab.style.display = 'none';
-    langTab.style.display = 'none';
+  /* TELECHARGEMENT AVEC POLICES EMBEDDED (ARABE SOUTENU) */
+function downloadPNG(){
+  const tab = document.getElementById('exportTab');
+  const langTab = document.getElementById('langTab');
+  const card = document.querySelector('#stage-invite .card');
+  
+  tab.classList.add('exporting');
+  
+  // Masquer les onglets pendant la capture
+  tab.style.display = 'none';
+  langTab.style.display = 'none';
 
-    // Assure la préparation des polices
-    const fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-
-    fontsReady.then(function(){
-      return domtoimage.toPng(card, {
-        scale: 2,
-        quality: 0.95,
-        filter: function(node){
-          // Exclure les onglets si trouvés dans le DOM
-          return !(node.id === 'exportTab' || node.id === 'langTab');
-        }
-      });
-    }).then(function(dataUrl){
-      const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
-      
-      const link = document.createElement('a');
-      link.download = downloadName;
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      
-      setTimeout(function(){
-        document.body.removeChild(link);
-      }, 100);
-    }).catch(function(err){
-      console.error('Export failed', err);
-    }).finally(function(){
-      // Réafficher les onglets
-      tab.style.display = '';
-      langTab.style.display = '';
-      tab.classList.remove('exporting');
+  // Force le navigateur à attendre le chargement complet des typographies
+  document.fonts.ready.then(function(){
+    return domtoimage.toPng(card, {
+      scale: 2,
+      quality: 1,
+      // Forcer dom-to-image à télécharger et intégrer la police Cairo/Amiri en Base64
+      cacheBust: true,
+      filter: function(node){
+        return !(node.id === 'exportTab' || node.id === 'langTab');
+      }
     });
-  }
+  }).then(function(dataUrl){
+    const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
+    
+    const link = document.createElement('a');
+    link.download = downloadName;
+    link.href = dataUrl;
+    document.body.appendChild(link);
+    link.click();
+    
+    setTimeout(function(){
+      document.body.removeChild(link);
+    }, 100);
+  }).catch(function(err){
+    console.error('Export failed', err);
+  }).finally(function(){
+    tab.style.display = '';
+    langTab.style.display = '';
+    tab.classList.remove('exporting');
+  });
+}
 
   function launchSparks(){
     const count = 16;
