@@ -6,401 +6,459 @@
 <title>Ferid &amp; Sara — Invitation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Pinyon+Script&family=Jost:wght@300;400;500&family=Cairo:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
-<!-- Remplacement de html2canvas par dom-to-image-more pour un rendu arabe parfait sur SVG natif -->
+<!-- Capture SVG/PNG haute fidélité -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.3.1/dom-to-image-more.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
-  :root{
-    --ivory:#FAF6ED;
-    --ivory-deep:#F0E7D2;
-    --gold:#B8935A;
-    --gold-soft:#D8BD8C;
-    --gold-deep:#8C6A3A;
-    --ink:#332C22;
-    --ink-soft:#6b6152;
+  :root {
+    --ivory: #FAF6ED;
+    --ivory-deep: #F0E7D2;
+    --gold: #B8935A;
+    --gold-soft: #D8BD8C;
+    --gold-deep: #8C6A3A;
+    --ink: #332C22;
+    --ink-soft: #6b6152;
     --card-w: 480px;
   }
-  *{box-sizing:border-box;}
-  html,body{
-    margin:0;
-    padding:0;
-    height:100%;
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     background:
       radial-gradient(circle at 20% 15%, rgba(184,147,90,0.10), transparent 45%),
       radial-gradient(circle at 85% 80%, rgba(184,147,90,0.12), transparent 50%),
       var(--ivory);
-    color:var(--ink);
-    font-family:'Jost',sans-serif;
-    overflow-x:hidden;
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
   }
-  .stage-wrap{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:32px 18px;
+
+  .stage-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 18px;
   }
-  .stage{
-    display:none;
-    width:100%;
-    max-width:var(--card-w);
-    text-align:center;
+
+  .stage {
+    display: none;
+    width: 100%;
+    max-width: var(--card-w);
+    text-align: center;
     animation: fadeUp .9s ease both;
   }
-  .stage.active{display:block;}
-  @keyframes fadeUp{
-    from{opacity:0; transform:translateY(14px);}
-    to{opacity:1; transform:translateY(0);}
+
+  .stage.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .mono{
-    letter-spacing:.32em;
-    font-size:11px;
-    color:var(--gold-deep);
-    font-weight:500;
-    text-transform:uppercase;
-  }
-  .divider{
-    width:64px;
-    height:1px;
-    background:linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin:22px auto;
+  .mono {
+    letter-spacing: .32em;
+    font-size: 11px;
+    color: var(--gold-deep);
+    font-weight: 500;
+    text-transform: uppercase;
   }
 
-  /* ---------- LANGUAGE STAGE ---------- */
-  .couple-names{
-    font-family:'Cormorant Garamond', serif;
-    font-size:44px;
-    font-weight:500;
-    font-style:italic;
-    color:var(--ink);
-    margin:14px 0 6px;
+  .divider {
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 22px auto;
   }
-  .couple-names .amp{
-    color:var(--gold);
-    font-style:normal;
-    font-size:.5em;
-    padding:0 14px;
-    vertical-align:middle;
-    display:inline-block;
+
+  /* ---------- STAGE 1 : LANGUE ---------- */
+  .couple-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--ink);
+    margin: 14px 0 6px;
   }
-  .lang-row{
-    display:flex;
-    gap:16px;
-    justify-content:center;
-    margin-top:36px;
-    flex-wrap:wrap;
+
+  .couple-names .amp {
+    color: var(--gold);
+    font-style: normal;
+    font-size: .5em;
+    padding: 0 14px;
+    vertical-align: middle;
+    display: inline-block;
   }
-  .lang-btn{
-    flex:1 1 160px;
-    background:transparent;
-    border:1px solid var(--gold-soft);
-    color:var(--ink);
-    padding:16px 20px;
-    font-size:15px;
-    letter-spacing:.06em;
-    cursor:pointer;
-    border-radius:2px;
+
+  .lang-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .lang-btn {
+    flex: 1 1 160px;
+    background: transparent;
+    border: 1px solid var(--gold-soft);
+    color: var(--ink);
+    padding: 16px 20px;
+    font-size: 15px;
+    letter-spacing: .06em;
+    cursor: pointer;
+    border-radius: 2px;
     transition: all .35s ease;
-    position:relative;
-  }
-  .lang-btn:hover, .lang-btn:focus-visible{
-    background:var(--gold);
-    color:var(--ivory);
-    border-color:var(--gold);
-  }
-  .lang-btn .sub{
-    display:block;
-    font-size:11px;
-    opacity:.65;
-    margin-top:4px;
-    font-family:'Jost',sans-serif;
-  }
-  .lang-btn[data-lang="ar"]{
-    font-family:'Amiri', serif;
-    font-size:20px;
-  }
-  .lang-btn[data-lang="ar"] .sub{
-    font-family:'Cairo', sans-serif;
   }
 
-  /* ---------- NAME STAGE ---------- */
-  .stage-label{
-    font-family:'Cormorant Garamond', serif;
-    font-size:26px;
-    font-style:italic;
-    margin-bottom:6px;
+  .lang-btn:hover, .lang-btn:focus-visible {
+    background: var(--gold);
+    color: var(--ivory);
+    border-color: var(--gold);
   }
-  [dir="rtl"] .stage-label{
-    font-family:'Amiri', serif;
-    font-style:normal;
-  }
-  .hint{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin-bottom:30px;
-  }
-  [dir="rtl"] .hint{ font-family:'Cairo', sans-serif; }
 
-  .name-field{
-    width:100%;
-    background:transparent;
-    border:none;
-    border-bottom:1px solid var(--gold-soft);
-    padding:12px 4px;
-    font-size:20px;
-    text-align:center;
-    color:var(--ink);
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    outline:none;
-    transition:border-color .3s ease;
+  .lang-btn .sub {
+    display: block;
+    font-size: 11px;
+    opacity: .65;
+    margin-top: 4px;
+    font-family: 'Jost', sans-serif;
   }
-  [dir="rtl"] .name-field{
-    font-family:'Amiri', serif;
-    font-style:normal;
-    font-size:19px;
-  }
-  .name-field:focus{border-color:var(--gold-deep);}
-  .name-field::placeholder{color:#b3a58c; opacity:.8;}
 
-  .lang-warning{
-    font-size:11px;
-    color:#A85C4A;
-    margin-top:12px;
-    min-height:14px;
-    opacity:0;
-    transform:translateY(-4px);
-    transition:opacity .3s ease, transform .3s ease;
-    letter-spacing:.02em;
+  .lang-btn[data-lang="ar"] {
+    font-family: 'Amiri', serif;
+    font-size: 20px;
   }
-  .lang-warning.show{opacity:1; transform:translateY(0);}
-  [dir="rtl"] .lang-warning{ font-family:'Cairo', sans-serif; }
 
-  .validate-row{
-    display:flex;
-    gap:14px;
-    justify-content:center;
-    margin-top:24px;
-    flex-wrap:wrap;
+  .lang-btn[data-lang="ar"] .sub {
+    font-family: 'Cairo', sans-serif;
   }
-  .validate-btn{
-    flex:1 1 150px;
-    background:transparent;
-    color:var(--gold-deep);
-    border:1px solid var(--gold-deep);
-    padding:14px 22px;
-    font-size:12px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    cursor:pointer;
-    border-radius:2px;
+
+  /* ---------- STAGE 2 : NOM ---------- */
+  .stage-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    margin-bottom: 6px;
+  }
+
+  [dir="rtl"] .stage-label {
+    font-family: 'Amiri', serif !important;
+    font-style: normal;
+  }
+
+  .hint {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 30px;
+  }
+
+  [dir="rtl"] .hint { font-family: 'Cairo', sans-serif !important; }
+
+  .name-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gold-soft);
+    padding: 12px 4px;
+    font-size: 20px;
+    text-align: center;
+    color: var(--ink);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    outline: none;
+    transition: border-color .3s ease;
+  }
+
+  [dir="rtl"] .name-field {
+    font-family: 'Amiri', serif !important;
+    font-style: normal;
+    font-size: 19px;
+  }
+
+  .name-field:focus { border-color: var(--gold-deep); }
+  .name-field::placeholder { color: #b3a58c; opacity: .8; }
+
+  .lang-warning {
+    font-size: 11px;
+    color: #A85C4A;
+    margin-top: 12px;
+    min-height: 14px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+
+  .lang-warning.show { opacity: 1; transform: translateY(0); }
+  [dir="rtl"] .lang-warning { font-family: 'Cairo', sans-serif !important; }
+
+  .validate-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+
+  .validate-btn {
+    flex: 1 1 150px;
+    background: transparent;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold-deep);
+    padding: 14px 22px;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
     transition: background .3s ease, color .3s ease, transform .2s ease;
   }
-  [dir="rtl"] .validate-btn{
-    font-family:'Cairo', sans-serif;
-    letter-spacing:.02em;
-  }
-  .validate-btn:hover:not(:disabled){background:var(--gold-deep); color:var(--ivory); transform:translateY(-1px);}
-  .validate-btn:disabled{opacity:.35; cursor:not-allowed; transform:none;}
 
-  .back-link{
-    display:inline-block;
-    margin-top:26px;
-    font-size:11px;
-    letter-spacing:.14em;
-    color:var(--ink-soft);
-    text-decoration:none;
-    cursor:pointer;
-    border-bottom:1px solid transparent;
+  [dir="rtl"] .validate-btn {
+    font-family: 'Cairo', sans-serif !important;
+    letter-spacing: .02em;
   }
-  .back-link:hover{border-color:var(--ink-soft);}
 
-  /* ---------- INVITATION STAGE ---------- */
-  .card{
-    position:relative;
-    padding:56px 34px 44px;
-    background:linear-gradient(180deg, #fffdf8, var(--ivory-deep));
-    box-shadow:0 20px 60px rgba(140,106,58,.18);
-    overflow:visible;
+  .validate-btn:hover:not(:disabled) {
+    background: var(--gold-deep);
+    color: var(--ivory);
+    transform: translateY(-1px);
   }
-  .frame-svg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
+
+  .validate-btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 26px;
+    font-size: 11px;
+    letter-spacing: .14em;
+    color: var(--ink-soft);
+    text-decoration: none;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
   }
-  .frame-svg rect{
-    fill:none;
-    stroke:var(--gold);
-    stroke-width:1.2;
-    stroke-dasharray:1808;
-    stroke-dashoffset:1808;
+
+  .back-link:hover { border-color: var(--ink-soft); }
+
+  /* ---------- STAGE 3 : CARD INVITATION ---------- */
+  .card {
+    position: relative;
+    padding: 56px 34px 44px;
+    background: linear-gradient(180deg, #fffdf8, var(--ivory-deep));
+    box-shadow: 0 20px 60px rgba(140,106,58,.18);
+    overflow: visible;
   }
-  .frame-svg.draw rect{
+
+  .frame-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .frame-svg rect {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.2;
+    stroke-dasharray: 1808;
+    stroke-dashoffset: 1808;
+  }
+
+  .frame-svg.draw rect {
     animation: drawFrame 1.8s cubic-bezier(.65,0,.35,1) forwards;
   }
-  @keyframes drawFrame{
-    to{stroke-dashoffset:0;}
+
+  @keyframes drawFrame { to { stroke-dashoffset: 0; } }
+
+  .frame-svg .corner {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.2;
+    opacity: 0;
   }
-  .frame-svg .corner{
-    fill:none;
-    stroke:var(--gold);
-    stroke-width:1.2;
-    opacity:0;
-  }
-  .frame-svg.draw .corner{
+
+  .frame-svg.draw .corner {
     animation: fadeIn .8s ease forwards .1s;
   }
-  @keyframes fadeIn{ to{opacity:1;} }
 
-  .card-inner{
-    opacity:0;
-    transform:scale(.96);
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .card-inner {
+    opacity: 0;
+    transform: scale(.96);
   }
-  .card-inner.reveal{
+
+  .card-inner.reveal {
     animation: cardReveal 1s cubic-bezier(.2,.7,.3,1) forwards .9s;
   }
-  @keyframes cardReveal{
-    to{opacity:1; transform:scale(1);}
+
+  @keyframes cardReveal { to { opacity: 1; transform: scale(1); } }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: var(--gold-deep);
+    text-transform: uppercase;
   }
 
-  .eyebrow{
-    font-size:11px;
-    letter-spacing:.3em;
-    color:var(--gold-deep);
-    text-transform:uppercase;
-  }
-  [dir="rtl"] .eyebrow{
-    font-family:'Cairo', sans-serif;
-    letter-spacing:.08em;
-  }
-  .guest-line{
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-size:19px;
-    color:var(--ink-soft);
-    margin-top:18px;
-  }
-  [dir="rtl"] .guest-line{
-    font-family:'Amiri', serif;
-    font-style:normal;
-  }
-  .guest-name{
-    color:var(--ink);
-    font-weight:600;
-  }
-  .invite-names{
-    font-family:'Cormorant Garamond', serif;
-    font-size:46px;
-    font-style:italic;
-    margin:16px 0 8px;
-  }
-  [dir="rtl"] .invite-names{
-    font-family:'Amiri', serif;
-    font-weight:700;
-    font-style:normal;
-  }
-  .invite-names .amp{
-    color:var(--gold);
-    font-style:normal;
-    font-size:.45em;
-    padding:0 16px;
-    vertical-align:middle;
-    display:inline-block;
-  }
-  .invite-blurb{
-    font-size:14px;
-    color:var(--ink-soft);
-    line-height:1.8;
-    max-width:340px;
-    margin:0 auto;
-  }
-  [dir="rtl"] .invite-blurb{ font-family:'Cairo', sans-serif; font-weight:300; }
-
-  .detail-block{
-    margin-top:30px;
-  }
-  .detail-date{
-    font-family:'Cormorant Garamond', serif;
-    font-size:22px;
-    font-style:italic;
-  }
-  [dir="rtl"] .detail-date{
-    font-family:'Amiri', serif;
-    font-style:normal;
-  }
-  .detail-venue{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin-top:6px;
-    letter-spacing:.02em;
-  }
-  [dir="rtl"] .detail-venue{ font-family:'Cairo', sans-serif; }
-
-  .spark{
-    position:fixed;
-    width:5px; height:5px;
-    border-radius:50%;
-    background:var(--gold);
-    pointer-events:none;
-    opacity:0;
-    z-index:5;
-  }
-  @keyframes floatUp{
-    0%{opacity:0; transform:translateY(0) scale(.6);}
-    12%{opacity:1;}
-    100%{opacity:0; transform:translateY(-140px) scale(1.1);}
+  .guest-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin-top: 18px;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.01ms !important; animation-iteration-count:1 !important;}
+  .guest-name { color: var(--ink); font-weight: 600; }
+
+  .invite-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px;
+    font-style: italic;
+    margin: 16px 0 8px;
   }
 
-  @media (max-width:420px){
-    .couple-names, .invite-names{font-size:36px;}
-    .card{padding:44px 22px 34px;}
+  .invite-names .amp {
+    color: var(--gold);
+    font-style: normal;
+    font-size: .45em;
+    padding: 0 16px;
+    vertical-align: middle;
+    display: inline-block;
   }
 
-  /* ---------- EXPORT PNG + LANGUE ---------- */
-  .export-tab, .lang-tab{
-    position:absolute;
-    width:34px;
-    height:34px;
-    background:var(--ivory);
-    border:1px solid var(--gold-soft);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    opacity:.85;
-    z-index:10;
-    font-size:13px;
-    line-height:1;
-    color:var(--gold-deep);
-    user-select:none;
-    box-shadow:0 4px 14px rgba(140,106,58,.14);
-    transition: opacity .3s ease, background .3s ease, color .3s ease, border-color .3s ease, transform .3s cubic-bezier(.4,0,.2,1);
+  .invite-blurb {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    max-width: 340px;
+    margin: 0 auto;
   }
-  .export-tab:hover, .lang-tab:hover{
-    opacity:1;
-    background:var(--gold-deep);
-    color:var(--ivory);
-    border-color:var(--gold-deep);
+
+  .detail-block { margin-top: 30px; }
+
+  .detail-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
   }
-  .export-tab.exporting{ opacity:.5; pointer-events:none; }
-  .export-tab{ top:40px; }
-  .lang-tab{ top:84px; font-size:14px; }
-  .export-tab[data-side="right"], .lang-tab[data-side="right"]{
-    right:-30px;
-    border-radius:4px 50% 50% 4px;
+
+  .detail-venue {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    letter-spacing: .02em;
   }
-  .export-tab[data-side="left"], .lang-tab[data-side="left"]{
-    left:-30px;
-    border-radius:50% 4px 4px 50%;
+
+  /* REGLES STRICTES D'APPLICATION DE LA TYPOGRAPHIE ARABE (RTL) */
+  [dir="rtl"] .eyebrow {
+    font-family: 'Cairo', sans-serif !important;
+    letter-spacing: .06em;
+    font-weight: 600;
+  }
+
+  [dir="rtl"] .guest-line {
+    font-family: 'Amiri', serif !important;
+    font-style: normal;
+    font-size: 21px;
+  }
+
+  [dir="rtl"] .invite-names {
+    font-family: 'Amiri', serif !important;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 48px;
+  }
+
+  [dir="rtl"] .invite-blurb {
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  [dir="rtl"] .detail-date {
+    font-family: 'Amiri', serif !important;
+    font-style: normal;
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  [dir="rtl"] .detail-venue {
+    font-family: 'Cairo', sans-serif !important;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ONGLETS DES ACTIONS */
+  .export-tab, .lang-tab {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    background: var(--ivory);
+    border: 1px solid var(--gold-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: .85;
+    z-index: 10;
+    font-size: 13px;
+    color: var(--gold-deep);
+    user-select: none;
+    box-shadow: 0 4px 14px rgba(140,106,58,.14);
+    transition: opacity .3s ease, background .3s ease, color .3s ease, transform .3s cubic-bezier(.4,0,.2,1);
+  }
+
+  .export-tab:hover, .lang-tab:hover {
+    opacity: 1;
+    background: var(--gold-deep);
+    color: var(--ivory);
+    border-color: var(--gold-deep);
+  }
+
+  .export-tab.exporting { opacity: .4; pointer-events: none; }
+  .export-tab { top: 40px; }
+  .lang-tab { top: 84px; font-size: 14px; }
+
+  .export-tab[data-side="right"], .lang-tab[data-side="right"] {
+    right: -30px;
+    border-radius: 4px 50% 50% 4px;
+  }
+
+  .export-tab[data-side="left"], .lang-tab[data-side="left"] {
+    left: -30px;
+    border-radius: 50% 4px 4px 50%;
+  }
+
+  /* PARTICULES ANIMÉES */
+  .spark {
+    position: fixed;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 5;
+  }
+
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(0) scale(.6); }
+    12% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-140px) scale(1.1); }
+  }
+
+  @media (max-width: 420px) {
+    .couple-names, .invite-names { font-size: 36px; }
+    [dir="rtl"] .invite-names { font-size: 40px; }
+    .card { padding: 44px 22px 34px; }
   }
 </style>
 </head>
@@ -408,7 +466,7 @@
 
 <div class="stage-wrap">
 
-  <!-- STAGE 1 : LANGUE -->
+  <!-- STAGE 1 : CHOIX DE LA LANGUE -->
   <section class="stage active" id="stage-lang">
     <div class="mono">Vous êtes conviés · أنتم مدعوون</div>
     <div class="couple-names">Ferid<span class="amp">✦</span>Sara</div>
@@ -425,7 +483,7 @@
     </div>
   </section>
 
-  <!-- STAGE 2 : NOM -->
+  <!-- STAGE 2 : SAISIE DU NOM -->
   <section class="stage" id="stage-name">
     <div class="stage-label" id="name-label">Votre nom</div>
     <div class="hint" id="name-hint">Afin de personnaliser votre invitation</div>
@@ -438,7 +496,7 @@
     <a class="back-link" onclick="goStage('stage-lang')" id="back-link">← changer de langue</a>
   </section>
 
-  <!-- STAGE 3 : INVITATION -->
+  <!-- STAGE 3 : CARTE D'INVITATION FINALE -->
   <section class="stage" id="stage-invite">
     <div class="card">
       <svg class="frame-svg" id="frameSvg" viewBox="0 0 400 560" preserveAspectRatio="none">
@@ -448,7 +506,7 @@
         <path class="corner" d="M386,516 L386,546 L356,546"></path>
         <path class="corner" d="M44,546 L14,546 L14,516"></path>
       </svg>
-      <div class="export-tab" id="exportTab" data-side="right" onclick="handleExportTabClick()">
+      <div class="export-tab" id="exportTab" data-side="right" onclick="downloadPNG()">
         <span class="icon"><i class="fa-solid fa-download"></i></span>
       </div>
       <div class="lang-tab" id="langTab" data-side="right" onclick="handleLangTabClick()">
@@ -520,28 +578,25 @@
   };
 
   function loadGuestData(){
-    try{
-      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    }catch(e){
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+    catch(e){ return {}; }
   }
 
   function saveGuestData(lang, name, gender){
     const data = loadGuestData();
     data[lang] = { name: name, gender: gender };
     data.lastLang = lang;
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e){}
   }
 
   function setLastLang(lang){
     const data = loadGuestData();
     data.lastLang = lang;
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }catch(e){}
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e){}
   }
 
   function goStage(id){
-    document.querySelectorAll('.stage').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 
@@ -565,7 +620,7 @@
     document.getElementById('langWarning').classList.remove('show');
 
     goStage('stage-name');
-    setTimeout(()=>document.getElementById('guestInput').focus(), 300);
+    setTimeout(() => document.getElementById('guestInput').focus(), 300);
   }
 
   const ARABIC_ALLOWED = /[^\u0600-\u06FF\u0750-\u077F\s'-]/g;
@@ -577,6 +632,7 @@
     const before = this.value;
     const filtered = before.replace(disallowed, '');
     const warningEl = document.getElementById('langWarning');
+    
     if(filtered !== before){
       const caret = this.selectionStart - (before.length - filtered.length);
       this.value = filtered;
@@ -584,12 +640,13 @@
       warningEl.textContent = content[currentLang].wrongLangMsg;
       warningEl.classList.add('show');
       clearTimeout(warnTimeout);
-      warnTimeout = setTimeout(()=>warningEl.classList.remove('show'), 2500);
+      warnTimeout = setTimeout(() => warningEl.classList.remove('show'), 2500);
     }
     const empty = this.value.trim().length === 0;
     document.getElementById('validateBtnM').disabled = empty;
     document.getElementById('validateBtnF').disabled = empty;
   });
+
   document.getElementById('guestInput').addEventListener('keydown', function(e){
     if(e.key === 'Enter' && this.value.trim().length){ validateName('m'); }
   });
@@ -609,19 +666,19 @@
     const outX = oldSide === 'right' ? '46px' : '-46px';
     const inX  = newSide === 'right' ? '46px' : '-46px';
 
-    tabs.forEach(function(t){
+    tabs.forEach(t => {
       t.style.transform = 'translateX(' + outX + ')';
       t.style.opacity = '0';
     });
 
-    setTimeout(function(){
-      tabs.forEach(function(t){
+    setTimeout(() => {
+      tabs.forEach(t => {
         t.setAttribute('data-side', newSide);
         t.style.transition = 'none';
         t.style.transform = 'translateX(' + inX + ')';
       });
       void tabs[0].offsetWidth;
-      tabs.forEach(function(t){
+      tabs.forEach(t => {
         t.style.transition = '';
         t.style.transform = 'translateX(0)';
         t.style.opacity = '';
@@ -660,10 +717,6 @@
     inner.classList.add('reveal');
   }
 
-  function handleExportTabClick(){
-    downloadPNG();
-  }
-
   function handleLangTabClick(){
     const other = currentLang === 'fr' ? 'ar' : 'fr';
     const data = loadGuestData();
@@ -674,54 +727,61 @@
     }
   }
 
-  /* TELECHARGEMENT AVEC POLICES EMBEDDED (ARABE SOUTENU) */
-function downloadPNG(){
-  const tab = document.getElementById('exportTab');
-  const langTab = document.getElementById('langTab');
-  const card = document.querySelector('#stage-invite .card');
-  
-  tab.classList.add('exporting');
-  
-  // Masquer les onglets pendant la capture
-  tab.style.display = 'none';
-  langTab.style.display = 'none';
+  /* EXPORT PNG GARANTI AVEC POLICE ARABE (MOBILE ET PC) */
+  async function downloadPNG(){
+    const tab = document.getElementById('exportTab');
+    const langTab = document.getElementById('langTab');
+    const card = document.querySelector('#stage-invite .card');
+    
+    tab.classList.add('exporting');
+    
+    // Masquer les boutons pendant la prise de vue
+    tab.style.display = 'none';
+    langTab.style.display = 'none';
 
-  // Force le navigateur à attendre le chargement complet des typographies
-  document.fonts.ready.then(function(){
-    return domtoimage.toPng(card, {
-      scale: 2,
-      quality: 1,
-      // Forcer dom-to-image à télécharger et intégrer la police Cairo/Amiri en Base64
-      cacheBust: true,
-      filter: function(node){
-        return !(node.id === 'exportTab' || node.id === 'langTab');
+    try {
+      // 1. Charger explicitement les typographies arabes en mémoire système avant la capture
+      if (document.fonts) {
+        await Promise.all([
+          document.fonts.load('400 16px "Amiri"'),
+          document.fonts.load('700 16px "Amiri"'),
+          document.fonts.load('400 16px "Cairo"'),
+          document.fonts.load('600 16px "Cairo"'),
+          document.fonts.ready
+        ]);
       }
-    });
-  }).then(function(dataUrl){
-    const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
-    
-    const link = document.createElement('a');
-    link.download = downloadName;
-    link.href = dataUrl;
-    document.body.appendChild(link);
-    link.click();
-    
-    setTimeout(function(){
+
+      // 2. Générer le PNG avec fond d'arrière-plan explicite et contournement de cache
+      const dataUrl = await domtoimage.toPng(card, {
+        scale: 2,
+        quality: 1,
+        cacheBust: true,
+        bgcolor: '#FAF6ED',
+        filter: (node) => !(node.id === 'exportTab' || node.id === 'langTab')
+      });
+
+      // 3. Déclencher le téléchargement compatible PC & Mobile
+      const downloadName = currentLang === 'ar' ? 'دعوة-فريد-سارة.png' : 'Invitation-Ferid-Sara.png';
+      const link = document.createElement('a');
+      link.download = downloadName;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
       document.body.removeChild(link);
-    }, 100);
-  }).catch(function(err){
-    console.error('Export failed', err);
-  }).finally(function(){
-    tab.style.display = '';
-    langTab.style.display = '';
-    tab.classList.remove('exporting');
-  });
-}
+
+    } catch (err) {
+      console.error('Export Failed:', err);
+    } finally {
+      tab.style.display = '';
+      langTab.style.display = '';
+      tab.classList.remove('exporting');
+    }
+  }
 
   function launchSparks(){
     const count = 16;
-    for(let i=0;i<count;i++){
-      setTimeout(()=>{
+    for(let i=0; i<count; i++){
+      setTimeout(() => {
         const s = document.createElement('div');
         s.className = 'spark';
         const x = window.innerWidth/2 + (Math.random()-0.5)*260;
@@ -730,7 +790,7 @@ function downloadPNG(){
         s.style.top = y+'px';
         s.style.animation = 'floatUp ' + (1.6+Math.random()*0.8) + 's ease-out forwards';
         document.body.appendChild(s);
-        setTimeout(()=>s.remove(), 2600);
+        setTimeout(() => s.remove(), 2600);
       }, i*70);
     }
   }
