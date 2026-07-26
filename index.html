@@ -119,10 +119,18 @@
     transition: all .35s ease;
   }
 
-  .lang-btn:hover, .lang-btn:focus-visible {
+  .lang-btn.flash, .lang-btn:focus-visible {
     background: var(--gold);
     color: var(--ivory);
     border-color: var(--gold);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lang-btn:hover {
+      background: var(--gold);
+      color: var(--ivory);
+      border-color: var(--gold);
+    }
   }
 
   .lang-btn .sub {
@@ -228,10 +236,17 @@
     letter-spacing: .02em;
   }
 
-  .validate-btn:hover:not(:disabled) {
+  .validate-btn.flash {
     background: var(--gold-deep);
     color: var(--ivory);
-    transform: translateY(-1px);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .validate-btn:hover:not(:disabled) {
+      background: var(--gold-deep);
+      color: var(--ivory);
+      transform: translateY(-1px);
+    }
   }
 
   .validate-btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
@@ -248,6 +263,84 @@
   }
 
   .back-link:hover { border-color: var(--ink-soft); }
+
+  /* ---------- COMPTE A REBOURS ---------- */
+  .countdown-wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    margin-bottom: 18px;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .45s ease, transform .45s cubic-bezier(.2,.7,.3,1);
+  }
+
+  .countdown-wrap.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .countdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 46px;
+  }
+
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--gold-deep);
+    line-height: 1;
+  }
+
+  [dir="rtl"] .cd-num { font-family: 'Aref Ruqaa', serif; }
+
+  .cd-label {
+    font-size: 9px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  [dir="rtl"] .cd-label {
+    font-family: 'Tajawal', sans-serif;
+    text-transform: none;
+    letter-spacing: .02em;
+  }
+
+  .cd-sep {
+    color: var(--gold);
+    font-size: 11px;
+    opacity: .6;
+    margin-bottom: 14px;
+  }
+
+  .countdown-done {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--gold-deep);
+  }
+
+  [dir="rtl"] .countdown-done {
+    font-family: 'Amiri', serif;
+    font-style: normal;
+  }
+
+  #stage-invite { position: relative; }
 
   /* ---------- STAGE 3 : CARD INVITATION ---------- */
   .card {
@@ -403,45 +496,62 @@
     font-weight: 500;
   }
 
-  /* ONGLETS DES ACTIONS */
-  .export-tab, .lang-tab {
+  /* GROUPE D'ONGLETS (une seule div englobant les 4 boutons) */
+  .tab-group {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    top: 40px;
+    z-index: 5;
+    transition: opacity .22s ease;
+  }
+
+  .tab-group[data-side="right"] { right: -30px; }
+  .tab-group[data-side="left"] { left: -30px; }
+  .tab-group.switching { opacity: 0; }
+
+  .card-tab {
     width: 34px;
     height: 34px;
     background: var(--ivory);
     border: 1px solid var(--gold-soft);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     opacity: .85;
-    z-index: -10;
     font-size: 13px;
     color: var(--gold-deep);
     user-select: none;
     box-shadow: 0 4px 14px rgba(140,106,58,.14);
-    transition: opacity .3s ease, background .3s ease, color .3s ease, transform .3s cubic-bezier(.4,0,.2,1);
+    transition: opacity .3s ease, background .3s ease, color .3s ease;
   }
 
-  .export-tab:hover, .lang-tab:hover {
+  .card-tab.flash {
     opacity: 1;
     background: var(--gold-deep);
     color: var(--ivory);
     border-color: var(--gold-deep);
   }
 
-  .export-tab.exporting { opacity: .4; pointer-events: none; }
-  .export-tab { top: 40px; }
-  .lang-tab { top: 84px; font-size: 14px; }
-
-  .export-tab[data-side="right"], .lang-tab[data-side="right"] {
-    right: -30px;
-    border-radius: 4px 50% 50% 4px;
+  @media (hover: hover) and (pointer: fine) {
+    .card-tab:hover {
+      opacity: 1;
+      background: var(--gold-deep);
+      color: var(--ivory);
+      border-color: var(--gold-deep);
+    }
   }
 
-  .export-tab[data-side="left"], .lang-tab[data-side="left"] {
-    left: -30px;
-    border-radius: 50% 4px 4px 50%;
+  .card-tab.exporting { opacity: .4; pointer-events: none; }
+  .lang-tab { font-size: 14px; }
+  .reset-tab { color: #A85C4A; }
+  .reset-tab.flash { background: #A85C4A; border-color: #A85C4A; color: var(--ivory); }
+
+  @media (hover: hover) and (pointer: fine) {
+    .reset-tab:hover { background: #A85C4A; border-color: #A85C4A; color: var(--ivory); }
   }
 
   /* PARTICULES ANIMÉES */
@@ -465,6 +575,18 @@
     .couple-names, .invite-names { font-size: 36px; }
     [dir="rtl"] .invite-names { font-size: 40px; }
     .card { padding: 44px 22px 34px; }
+
+    /* Sur mobile : le groupe d'onglets se recale sur le bord bas de la carte */
+    .tab-group[data-side="right"],
+    .tab-group[data-side="left"] {
+      top: auto;
+      right: auto;
+      left: 50%;
+      bottom: -26px;
+      transform: translateX(-50%);
+      flex-direction: row;
+      gap: 10px;
+    }
   }
 </style>
 </head>
@@ -504,6 +626,20 @@
 
   <!-- STAGE 3 : CARTE D'INVITATION FINALE -->
   <section class="stage" id="stage-invite">
+
+    <div class="countdown-wrap" id="countdownWrap">
+      <div class="countdown-row" id="countdownRow">
+        <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span class="cd-label" id="cdLabelDays">Jours</span></div>
+        <span class="cd-sep">✦</span>
+        <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span class="cd-label" id="cdLabelHours">Heures</span></div>
+        <span class="cd-sep">✦</span>
+        <div class="cd-unit"><span class="cd-num" id="cdMinutes">00</span><span class="cd-label" id="cdLabelMinutes">Min</span></div>
+        <span class="cd-sep">✦</span>
+        <div class="cd-unit"><span class="cd-num" id="cdSeconds">00</span><span class="cd-label" id="cdLabelSeconds">Sec</span></div>
+      </div>
+      <div class="countdown-done" id="countdownDone" style="display:none;"></div>
+    </div>
+
     <div class="card">
       <svg class="frame-svg" id="frameSvg" viewBox="0 0 400 560" preserveAspectRatio="none">
         <rect x="14" y="14" width="372" height="532"></rect>
@@ -512,11 +648,19 @@
         <path class="corner" d="M386,516 L386,546 L356,546"></path>
         <path class="corner" d="M44,546 L14,546 L14,516"></path>
       </svg>
-      <div class="export-tab" id="exportTab" data-side="right" onclick="downloadPNG()">
-        <span class="icon"><i class="fa-solid fa-download"></i></span>
-      </div>
-      <div class="lang-tab" id="langTab" data-side="right" onclick="handleLangTabClick()">
-        <span class="icon"><i class="fa-solid fa-globe"></i></span>
+      <div class="tab-group" id="tabGroup" data-side="right">
+        <div class="card-tab export-tab" id="exportTab" onclick="downloadPNG()">
+          <span class="icon"><i class="fa-solid fa-download"></i></span>
+        </div>
+        <div class="card-tab lang-tab" id="langTab" onclick="handleLangTabClick()">
+          <span class="icon"><i class="fa-solid fa-globe"></i></span>
+        </div>
+        <div class="card-tab countdown-tab" id="countdownTab" onclick="toggleCountdown()">
+          <span class="icon"><i class="fa-regular fa-clock"></i></span>
+        </div>
+        <div class="card-tab reset-tab" id="resetTab" onclick="resetExperience()">
+          <span class="icon"><i class="fa-solid fa-rotate-left"></i></span>
+        </div>
       </div>
       <div class="card-inner" id="cardInner">
         <div class="guest-line" id="inv-guest">Cher(e) <span class="guest-name" id="guestNameOut"></span>,</div>
@@ -538,6 +682,7 @@
 <script>
   let currentLang = 'fr';
   const STORAGE_KEY = 'feridSaraInvite';
+  const WEDDING_DATE = new Date('2027-05-29T18:00:00+01:00');
 
 const content = {
   ar: {
@@ -548,7 +693,7 @@ const content = {
     validateM: 'تأكيد الحضور (السيد)',
     validateF: 'تأكيد الحضور (السيدة)',
     back: '→ تغيير اللغة',
-    eyebrow: 'يسرُّ عائلتا المليتي والخروبي بدعوتكم لمشاركتهما فرحة زفاف إبنيهما',
+    eyebrow: 'يسرُّ عائلتا المليتي والخروبي بدعوتكم لمشاركتهما فرحة زفاف إبنيهما',
     guestPrefixM: 'السيد ',
     guestPrefixF: 'السيدة ',
     guestSuffix: '،',
@@ -559,7 +704,9 @@ const content = {
     date: 'السبت 29 ماي 2027',
     venue: 'قاعة حنبعل للأفراح — سليانة',
     side: 'left',
-    wrongLangMsg: 'الرجاء كتابة اسمك بالأحرف العربية'
+    wrongLangMsg: 'الرجاء كتابة اسمك بالأحرف العربية',
+    cdLabels: { days: 'أيام', hours: 'ساعات', minutes: 'دقائق', seconds: 'ثواني' },
+    cdToday: 'اليوم هو اليوم الموعود! 🎉'
   },
   fr: {
     dir: 'ltr',
@@ -580,7 +727,9 @@ const content = {
     date: 'Samedi 29 Mai 2027',
     venue: 'Salle des Fêtes Hannibal — Siliana',
     side: 'right',
-    wrongLangMsg: "Merci d'écrire votre nom en français"
+    wrongLangMsg: "Merci d'écrire votre nom en français",
+    cdLabels: { days: 'Jours', hours: 'Heures', minutes: 'Min', seconds: 'Sec' },
+    cdToday: "C'est aujourd'hui ! 🎉"
   }
 };
   function loadGuestData(){
@@ -664,32 +813,35 @@ const content = {
     renderInvite(currentLang, name, gender);
   }
 
+  /* RETOUR VISUEL TEMPORAIRE AU TAP SUR TOUS LES BOUTONS (2,5s puis retour à l'état d'origine) */
+  function flashTab(id){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.add('flash');
+    clearTimeout(el._flashTimeout);
+    el._flashTimeout = setTimeout(() => el.classList.remove('flash'), 2500);
+  }
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.lang-btn, .validate-btn:not(:disabled), .card-tab');
+    if(!btn) return;
+    btn.classList.add('flash');
+    clearTimeout(btn._flashTimeout);
+    btn._flashTimeout = setTimeout(() => btn.classList.remove('flash'), 2500);
+  });
+
   function switchTabsSide(newSide){
-    const tabs = [document.getElementById('exportTab'), document.getElementById('langTab')];
-    const oldSide = tabs[0].getAttribute('data-side');
+    const group = document.getElementById('tabGroup');
+    const oldSide = group.getAttribute('data-side');
     if(oldSide === newSide) return;
 
-    const outX = oldSide === 'right' ? '46px' : '-46px';
-    const inX  = newSide === 'right' ? '46px' : '-46px';
-
-    tabs.forEach(t => {
-      t.style.transform = 'translateX(' + outX + ')';
-      t.style.opacity = '0';
-    });
-
+    group.classList.add('switching');
     setTimeout(() => {
-      tabs.forEach(t => {
-        t.setAttribute('data-side', newSide);
-        t.style.transition = 'none';
-        t.style.transform = 'translateX(' + inX + ')';
-      });
-      void tabs[0].offsetWidth;
-      tabs.forEach(t => {
-        t.style.transition = '';
-        t.style.transform = 'translateX(0)';
-        t.style.opacity = '';
-      });
-    }, 260);
+      group.setAttribute('data-side', newSide);
+      setTimeout(() => {
+        group.classList.remove('switching');
+      }, 20);
+    }, 220);
   }
 
   function renderInvite(lang, name, gender){
@@ -703,13 +855,20 @@ const content = {
     document.getElementById('inv-blurb').textContent = c.blurb;
     document.getElementById('inv-date').textContent = c.date;
     document.getElementById('inv-venue').textContent = c.venue;
-    document.getElementById('guestNameOut').textContent = name;
     document.getElementById('inv-names').innerHTML = c.nameA + '<span class="amp">' + c.amp + '</span>' + c.nameB;
 
-    document.getElementById('inv-guest').childNodes[0].textContent = prefix;
-    document.getElementById('inv-guest').childNodes[2].textContent = c.guestSuffix;
+    const guestLine = document.getElementById('inv-guest');
+    if(name){
+      guestLine.style.display = '';
+      document.getElementById('guestNameOut').textContent = name;
+      guestLine.childNodes[0].textContent = prefix;
+      guestLine.childNodes[2].textContent = c.guestSuffix;
+    } else {
+      guestLine.style.display = 'none';
+    }
 
     switchTabsSide(c.side);
+    updateCountdown();
 
     goStage('stage-invite');
     launchSparks();
@@ -724,6 +883,7 @@ const content = {
   }
 
   function handleLangTabClick(){
+    flashTab('langTab');
     const other = currentLang === 'fr' ? 'ar' : 'fr';
     const data = loadGuestData();
     if(data[other] && data[other].name){
@@ -733,17 +893,69 @@ const content = {
     }
   }
 
+  /* AFFICHER / MASQUER LE COMPTE A REBOURS AU-DESSUS DE LA CARTE */
+  function toggleCountdown(){
+    flashTab('countdownTab');
+    const wrap = document.getElementById('countdownWrap');
+    wrap.classList.toggle('open');
+    if(wrap.classList.contains('open')) updateCountdown();
+  }
+
+  /* MISE A JOUR DU COMPTE A REBOURS EN DIRECT */
+  function updateCountdown(){
+    const c = content[currentLang] || content.fr;
+    const row = document.getElementById('countdownRow');
+    const done = document.getElementById('countdownDone');
+
+    document.getElementById('cdLabelDays').textContent = c.cdLabels.days;
+    document.getElementById('cdLabelHours').textContent = c.cdLabels.hours;
+    document.getElementById('cdLabelMinutes').textContent = c.cdLabels.minutes;
+    document.getElementById('cdLabelSeconds').textContent = c.cdLabels.seconds;
+
+    const diff = WEDDING_DATE - new Date();
+    if(diff <= 0){
+      row.style.display = 'none';
+      done.style.display = 'block';
+      done.textContent = c.cdToday;
+      return;
+    }
+    row.style.display = 'flex';
+    done.style.display = 'none';
+
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff / (1000*60*60)) % 24);
+    const m = Math.floor((diff / (1000*60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cdDays').textContent = String(d).padStart(2,'0');
+    document.getElementById('cdHours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdMinutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdSeconds').textContent = String(s).padStart(2,'0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  /* REINITIALISATION DE L'EXPERIENCE */
+  function resetExperience(){
+    flashTab('resetTab');
+    const msg = 'Effacer les données enregistrées et recommencer ?\nحذف البيانات المحفوظة والبدء من جديد؟';
+    if(confirm(msg)){
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      location.reload();
+    }
+  }
+
   /* EXPORT PNG GARANTI AVEC POLICE ARABE (MOBILE ET PC) */
   async function downloadPNG(){
+    flashTab('exportTab');
     const tab = document.getElementById('exportTab');
-    const langTab = document.getElementById('langTab');
+    const group = document.getElementById('tabGroup');
     const card = document.querySelector('#stage-invite .card');
     
     tab.classList.add('exporting');
     
-    // Masquer les boutons pendant la prise de vue
-    tab.style.display = 'none';
-    langTab.style.display = 'none';
+    // Masquer le groupe d'onglets pendant la prise de vue
+    group.style.display = 'none';
 
     try {
       // 1. Charger explicitement les typographies en mémoire système avant la capture
@@ -766,7 +978,7 @@ const content = {
         quality: 1,
         cacheBust: true,
         bgcolor: '#FAF6ED',
-        filter: (node) => !(node.id === 'exportTab' || node.id === 'langTab')
+        filter: (node) => node.id !== 'tabGroup'
       });
 
       // 3. Déclencher le téléchargement compatible PC & Mobile
@@ -781,8 +993,7 @@ const content = {
     } catch (err) {
       console.error('Export Failed:', err);
     } finally {
-      tab.style.display = '';
-      langTab.style.display = '';
+      group.style.display = '';
       tab.classList.remove('exporting');
     }
   }
